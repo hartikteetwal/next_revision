@@ -80,3 +80,92 @@ Browser-side rendering features are functionalities that require the browser env
 | Static JSX     | ❌                    |
 | async fetch    | ❌                    |
 | SEO content    | ❌                    |
+
+
+# When should we use "use client"?
+When we are using Hooks event and browser API then we should to make component client component using "use client"
+
+# What is cache: 'no-store' in Next.js?
+cache: 'no-store' is a fetch option in Next.js that disables caching. It forces Next.js to fetch fresh data on every request, making the route dynamically rendered. It is commonly used for dashboards, user-specific data, and real-time information where up-to-date data is required.
+```
+const res = await fetch('https://api.example.com/users', {
+  cache: 'no-store',
+});
+```
+
+# SSR (Server Side Rendering):
+HTML is generated on every request at the server. It provides fresh data but is slower than static pages.
+```
+User Request
+      ↓
+Server fetches latest data
+      ↓
+Server generates HTML
+      ↓
+HTML sent to browser
+```
+
+# SSG (Static Site Generation):
+HTML is generated during build time and served as static files. It is very fast but data updates require a new build.
+```
+npm run build
+      ↓
+HTML generated
+      ↓
+Stored on server/CDN
+      ↓
+Users get same static HTML
+```
+
+# ISR (Incremental Static Regeneration):
+ISR is a combination of SSG and SSR. The page is generated at build time but can be automatically updated after a specific time without rebuilding the entire application.
+
+```
+Build Time
+    ↓
+Static page generated
+    ↓
+Users get cached page
+
+After 60 sec
+    ↓
+Next request triggers regeneration
+    ↓
+New page cached
+```
+
+# CSR (Client-Side Rendering)
+In CSR, the browser is responsible for creating and displaying the page. The server sends JavaScript files, and the browser fetches data and renders the UI.
+```
+User Request
+      ↓
+Server fetches data
+      ↓
+Server generates HTML
+      ↓
+HTML sent to Browser
+      ↓
+Page displayed
+```
+
+# Why fetch data on the server side?
+- Faster initial page load
+- Better SEO
+- API keys remain secure
+- Less JavaScript sent to browser
+- Direct database access possible
+```
+export default async function UsersPage() {
+  const res = await fetch("https://api.example.com/users");
+  const users = await res.json();
+
+  return (
+    <div>
+      {users.map(user => (
+        <p key={user.id}>{user.name}</p>
+      ))}
+    </div>
+  );
+}
+```
+

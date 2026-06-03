@@ -1,6 +1,12 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
+export const metadata = {
+    title: 'Dashboard - My Next.js App',
+    description: 'Dashboard layout with sidebar navigation',
+    template: "$s - Dashboard - My Next.js App",
+}
+
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     return (
         <section className="flex min-h-screen bg-gray-100">

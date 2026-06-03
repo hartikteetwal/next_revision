@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-gray-100 min-h-screen flex flex-col">
 
         {/* Header */}
-        <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+        <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
             <h1 className="text-2xl font-bold tracking-wide">
@@ -35,6 +35,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </Link>
               <Link href="/blog" className="hover:text-gray-200 transition">
                 Blog
+              </Link>
+              <Link href="/products" className="hover:text-gray-200 transition">
+                Products
               </Link>
             </nav>
 
